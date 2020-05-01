@@ -117,3 +117,5 @@ const SingleCocktail = () => {
     );
   }
 }
+
+export default SingleCocktail;
