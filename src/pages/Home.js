@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
-export default function Home() {
-  const [loading, setLoading] = React.useState(false);
-  const [searchTerm, setSearchTerm] = React.useState("a");
-  const [cocktails, setCocktails] = React.useState([]);
 
-  React.useEffect(() => {
+
+const Home = () => {
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("a");
+  const [cocktails, setCocktails] = useState([]);
+
+  useEffect(() => {
     setLoading(true);
     async function getDrinks() {
       try {
@@ -16,14 +18,14 @@ export default function Home() {
         const data = await response.json();
         const { drinks } = data;
         if (drinks) {
-          const newCocktails = drinks.map(item => {
+          const newCocktails = drinks.map(drink => {
             const {
               idDrink,
               strDrink,
               strDrinkThumb,
               strAlcoholic,
               strGlass
-            } = item;
+            } = drink;
 
             return {
               id: idDrink,
@@ -52,3 +54,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home;
