@@ -1,7 +1,8 @@
 import React from "react";
 import Cocktail from "./Cocktail";
 
-const CocktailList = ({ cocktails, loading }) => {
+const CocktailList = ({ cocktails, loading, searchTerm }) => {
+  console.log(searchTerm)
   if (loading) {
     return <h2 className="section-title">Loading...</h2>;
   }
@@ -13,14 +14,30 @@ const CocktailList = ({ cocktails, loading }) => {
     );
   }
   return (
-    <section className="section">
-      <h2 className="section-title">Cocktails</h2>
-      <div className="cocktails-center">
-        {cocktails.map(cocktail => {
-          return <Cocktail key={cocktail.id} {...cocktail} />;
-        })}
+    <div>
+      {!searchTerm ?
+      <div>
+        <section className='section'>
+        <h2 className='section-title'>Mark's Recommendations</h2>
+        <div className="cocktails-center">
+          {cocktails.map(cocktail => {
+            return <Cocktail key={cocktail.id} {...cocktail} />
+          })}
+        </div>
+        </section>
       </div>
-    </section>
+      : 
+      <div>
+      <section className='section'>
+        <h2 className="section-title">Cocktail Results</h2>
+        <div className="cocktails-center">
+          {cocktails.map(cocktail => {
+            return <Cocktail key={cocktail.id} {...cocktail} />
+          })}
+        </div>
+      </section>
+      </div>}
+    </div>
   );
 }
 
